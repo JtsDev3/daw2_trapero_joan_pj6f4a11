@@ -13,5 +13,6 @@
     RewriteRule ^(users|orders)(/|$) - [F,L]
 
     # 3. The application root opens the Home page
-    RewriteRule ^$ application/client/index.html [R=302,L]
+    #    (%{REQUEST_URI} keeps it working in the web root and in a subfolder)
+    RewriteRule ^$ %{REQUEST_URI}application/client/index.html [R=302,L]
 </IfModule>
