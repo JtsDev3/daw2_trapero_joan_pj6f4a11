@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login – Order Management App</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/common.js" defer></script>
+    <script src="js/login.js" defer></script>
+</head>
+<body>
+    <header class="app-header">
+        <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+            <circle class="logo-background" cx="32" cy="32" r="32"/>
+            <path class="logo-handle" d="M23 27 L29 15 M41 27 L35 15"/>
+            <circle class="logo-dot" cx="39" cy="24" r="6"/>
+            <path class="logo-basket" d="M11 27 H53 L47.5 50 Q47 52 45 52 H19 Q17 52 16.5 50 Z"/>
+            <path class="logo-slats" d="M24 33 V46 M32 33 V46 M40 33 V46"/>
+        </svg>
+        <span class="app-name">Order Management App</span>
+    </header>
+
+    <main class="page">
+        <section class="card card--narrow">
+            <h1>Login</h1>
+            <p class="hint">Enter your username and password to access the operations menu.</p>
+
+            <form id="loginForm" novalidate>
+                <div class="form-field">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" autocomplete="username">
+                </div>
+                <div class="form-field">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" autocomplete="current-password">
+                </div>
+
+                <p id="loginMessage" class="message" role="alert" hidden></p>
+
+                <div class="button-bar">
+                    <button type="button" data-href="index.html">Home</button>
+                    <button type="submit" class="primary">Access operations menu</button>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
