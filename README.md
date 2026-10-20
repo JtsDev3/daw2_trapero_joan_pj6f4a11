@@ -102,3 +102,58 @@ and blocks direct access to the `users` and `orders` folders.
 
 The user is defined in `users/users.json` (user `admin`). The password is stored as a
 bcrypt hash and is checked on the server with `password_verify()`.
+
+## Structure
+
+```
+orderManagementApp/
+├── application/
+│   ├── client/
+│   │   ├── index.html          1. Home
+│   │   ├── documentation.html  2. Description and documentation
+│   │   ├── login.html          3. Authentication
+│   │   ├── operations.html     4. Operations menu
+│   │   ├── createOrder.html    5. Create new order
+│   │   ├── viewOrders.html     6. View orders menu
+│   │   ├── singleOrder.html    8. Single order search
+│   │   ├── css/styles.css      Common stylesheet
+│   │   └── js/                 common.js, login.js, menu.js, createOrder.js, singleOrder.js
+│   └── server/
+│       ├── config.php          Paths, VAT rate and product catalog
+│       ├── functions.php       Shared functions used by every endpoint
+│       ├── login.php           POST  - checks the credentials (JSON result)
+│       ├── catalog.php         GET   - products and prices (JSON)
+│       ├── createOrder.php     POST  - saves an order, answers the total with VAT
+│       ├── allOrders.php       GET   - 7. HTML table with all the orders (200 / 404)
+│       └── getOrder.php        GET   - 8. HTML table with one order (200 / 404)
+├── orders/                     orders.json is created with the first order
+└── users/
+    └── users.json              Predefined users (read-only)
+```
+
+## Products
+
+| ID | Product | Price |
+|----|---------|-------|
+| P1 | Whole Milk 1 L | 0.99 € |
+| P2 | Free-range Eggs (12 units) | 2.95 € |
+| P3 | Extra Virgin Olive Oil 1 L | 5.49 € |
+| P4 | Sliced Bread 450 g | 1.39 € |
+
+Prices are defined only in `application/server/config.php` (`getCatalog()`). VAT: 21%.
+
+## HTTP methods and status codes
+
+| Request | Method | Success | Errors |
+|---------|--------|---------|--------|
+| `login.php` | POST | 200 `{"authenticated": true/false}` | 400 empty data |
+| `catalog.php` | GET | 200 JSON | – |
+| `createOrder.php` | POST | 200 total with VAT (plain text) | 404 orders file (HTML), 400 invalid data, 409 duplicated ID, 401 not logged in |
+| `allOrders.php` | GET | 200 HTML table | 404 orders file (HTML) |
+| `getOrder.php?orderId=…` | GET | 200 HTML table | 404 orders file / order not found (HTML) |
+
+Any request with the wrong method gets 405 Method Not Allowed.
+
+## Testing
+
+See [TESTING.md](TESTING.md) for the complete test script (normal use and every error case).
