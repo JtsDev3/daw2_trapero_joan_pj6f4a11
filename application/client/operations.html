@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operations menu – Order Management App</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/common.js" defer></script>
+    <script src="js/menu.js" defer></script>
+</head>
+<body>
+    <header class="app-header">
+        <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+            <circle class="logo-background" cx="32" cy="32" r="32"/>
+            <path class="logo-handle" d="M23 27 L29 15 M41 27 L35 15"/>
+            <circle class="logo-dot" cx="39" cy="24" r="6"/>
+            <path class="logo-basket" d="M11 27 H53 L47.5 50 Q47 52 45 52 H19 Q17 52 16.5 50 Z"/>
+            <path class="logo-slats" d="M24 33 V46 M32 33 V46 M40 33 V46"/>
+        </svg>
+        <span class="app-name">Order Management App</span>
+    </header>
+
+    <main class="page">
+        <section class="card card--narrow">
+            <h1>Operations menu</h1>
+            <p class="hint">Choose the operation you want to carry out and click Go.</p>
+
+            <form id="menuForm" novalidate>
+                <div class="form-field">
+                    <label for="operation">Operation</label>
+                    <select id="operation" name="operation">
+                        <option value="">-- Select an operation --</option>
+                        <option value="createOrder.html">Create new order</option>
+                        <option value="viewOrders.html">View orders</option>
+                    </select>
+                </div>
+
+                <p id="menuMessage" class="message" role="alert" hidden></p>
+
+                <div class="button-bar">
+                    <button type="submit" class="primary">Go</button>
+                    <button type="button" data-href="index.html">Home</button>
+                </div>
+            </form>
+        </section>
+    </main>
+</body>
+</html>
