@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create new order – Order Management App</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/common.js" defer></script>
+    <script src="js/createOrder.js" defer></script>
+</head>
+<body>
+    <header class="app-header">
+        <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+            <circle class="logo-background" cx="32" cy="32" r="32"/>
+            <path class="logo-handle" d="M23 27 L29 15 M41 27 L35 15"/>
+            <circle class="logo-dot" cx="39" cy="24" r="6"/>
+            <path class="logo-basket" d="M11 27 H53 L47.5 50 Q47 52 45 52 H19 Q17 52 16.5 50 Z"/>
+            <path class="logo-slats" d="M24 33 V46 M32 33 V46 M40 33 V46"/>
+        </svg>
+        <span class="app-name">Order Management App</span>
+    </header>
+
+    <main class="page">
+        <section class="card card--medium">
+            <h1>Create new order</h1>
+            <p class="hint">Fill in every field, select the products and click Submit order.</p>
+
+            <form id="orderForm" novalidate>
+                <fieldset>
+                    <legend>Order</legend>
+                    <div class="form-field">
+                        <label for="orderId">Order ID</label>
+                        <input type="text" id="orderId" name="orderId" maxlength="20" placeholder="e.g. ORD-0001" autocomplete="off">
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Customer</legend>
+                    <div class="form-grid">
+                        <div class="form-field">
+                            <label for="fullName">Full name</label>
+                            <input type="text" id="fullName" name="fullName" autocomplete="name">
+                        </div>
+                        <div class="form-field">
+                            <label for="address">Address</label>
+                            <input type="text" id="address" name="address" autocomplete="street-address">
+                        </div>
+                        <div class="form-field">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" autocomplete="email">
+                        </div>
+                        <div class="form-field">
+                            <label for="phone">Phone</label>
+                            <input type="tel" id="phone" name="phone" autocomplete="tel">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Products</legend>
+                    <p class="hint">Tick a product to enable its quantity.</p>
+                    <div class="table-wrapper">
+                        <table class="products-table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Select</th>
+                                    <th scope="col">Product</th>
+                                    <th scope="col" class="amount">Unit price</th>
+                                    <th scope="col">Quantity</th>
+                                </tr>
+                            </thead>
+                            <tbody id="productList">
+                                <tr>
+                                    <td colspan="4">Loading products…</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+
+                <p id="orderMessage" class="message" role="alert" hidden></p>
+
+                <div class="button-bar">
+                    <button type="submit" class="primary">Submit order</button>
+                </div>
+            </form>
+
+            <section id="orderResult" class="result" aria-live="polite" hidden>
+                <h2>Order saved</h2>
+                <p id="orderResultText"></p>
+            </section>
+
+            <div class="button-bar">
+                <button type="button" data-href="operations.html">Operations menu</button>
+                <button type="button" data-href="index.html">Home</button>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
