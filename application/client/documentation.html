@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentation – Order Management App</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/common.js" defer></script>
+</head>
+<body>
+    <header class="app-header">
+        <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+            <circle class="logo-background" cx="32" cy="32" r="32"/>
+            <path class="logo-handle" d="M23 27 L29 15 M41 27 L35 15"/>
+            <circle class="logo-dot" cx="39" cy="24" r="6"/>
+            <path class="logo-basket" d="M11 27 H53 L47.5 50 Q47 52 45 52 H19 Q17 52 16.5 50 Z"/>
+            <path class="logo-slats" d="M24 33 V46 M32 33 V46 M40 33 V46"/>
+        </svg>
+        <span class="app-name">Order Management App</span>
+    </header>
+
+    <main class="page">
+        <section class="card card--medium">
+            <h1>Documentation</h1>
+
+            <h2>About the application</h2>
+            <p>
+                Order Management App is the e-commerce tool used by the sales representatives of our
+                European supermarket chain. It lets them register the orders placed by customers and
+                check them later. Every price and amount is calculated on the server, including
+                21% VAT, and all orders are stored on the server in JSON format.
+            </p>
+            <p>
+                Products available: Whole Milk 1 L, Free-range Eggs (12 units), Extra Virgin Olive Oil 1 L
+                and Sliced Bread 450 g. Their prices are always loaded from the server.
+            </p>
+
+            <h2>Getting started</h2>
+            <ol class="doc-list">
+                <li>On the Home page, click <strong>Login</strong>.</li>
+                <li>Enter your username and password and click <strong>Access operations menu</strong>.
+                    Both fields are required. If the credentials are not valid, an authentication
+                    error is shown and you go back to the Home page.</li>
+                <li>In the <strong>Operations menu</strong>, choose an operation in the list and click
+                    <strong>Go</strong>.</li>
+            </ol>
+
+            <h2>Operation 1 – Create new order</h2>
+            <ol class="doc-list">
+                <li>Enter the order ID (letters, numbers, "-" or "_", up to 20 characters). It must be unique.</li>
+                <li>Enter the customer's full name, address, email and phone number.</li>
+                <li>Tick the checkbox of each product the customer wants: this enables its quantity field.
+                    Then type the quantity (a whole number from 1 to 999).</li>
+                <li>Click <strong>Submit order</strong>. The server calculates the order and saves it.
+                    The total amount with VAT included is shown below the form.</li>
+                <li>If a field is missing, the application tells you which one before sending anything.
+                    If the order ID already exists, the order is rejected.</li>
+            </ol>
+
+            <h2>Operation 2 – View orders</h2>
+            <p>Choose one of these options in the <strong>View orders</strong> menu and click <strong>Go</strong>:</p>
+            <ul class="doc-list">
+                <li><strong>All orders</strong>: shows a table with every stored order: order ID, date,
+                    customer details, products (quantity × unit price), subtotal, VAT and total.</li>
+                <li><strong>Single order</strong>: type an order ID and click <strong>Search</strong> to see
+                    the table with the data of that order. If no order has that ID, an error page is shown.</li>
+            </ul>
+            <p>
+                If the orders file cannot be found or opened (for example, before the first order is
+                created), an error page is shown with buttons to go back to the View orders menu,
+                the Operations menu or the Home page.
+            </p>
+
+            <div class="button-bar">
+                <button type="button" data-href="index.html">Home</button>
+                <button type="button" class="primary" data-href="login.html">Login</button>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
