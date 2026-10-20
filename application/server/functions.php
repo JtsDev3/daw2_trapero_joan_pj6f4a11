@@ -445,8 +445,8 @@ function renderAppHeader(): string
     <header class="app-header">
         <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
             <circle class="logo-background" cx="32" cy="32" r="32"/>
-            <path class="logo-handle" d="M23 27 L29 15 M41 27 L35 15"/>
-            <circle class="logo-dot" cx="39" cy="24" r="6"/>
+            <path class="logo-handle" d="M19 28 Q32 3 45 28"/>
+            <circle class="logo-dot" cx="31" cy="23" r="7"/>
             <path class="logo-basket" d="M11 27 H53 L47.5 50 Q47 52 45 52 H19 Q17 52 16.5 50 Z"/>
             <path class="logo-slats" d="M24 33 V46 M32 33 V46 M40 33 V46"/>
         </svg>
@@ -504,7 +504,7 @@ function sendHtmlPage(int $statusCode, string $title, string $content): void
 </head>
 <body>
 {$header}
-    <main class="page">
+    <main class="page page--wide">
         <section class="card">
             {$content}
             {$buttons}
@@ -572,12 +572,12 @@ function renderOrderRow(array $order): string
     $totals = $order['totals'] ?? [];
 
     return '<tr>'
-        . renderCell((string) ($order['orderId'] ?? ''), 'total')
+        . renderCell((string) ($order['orderId'] ?? ''), 'total nowrap')
         . renderCell((string) ($order['createdAt'] ?? ''))
         . renderCell((string) ($customer['fullName'] ?? ''))
         . renderCell((string) ($customer['address'] ?? ''))
         . renderCell((string) ($customer['email'] ?? ''))
-        . renderCell((string) ($customer['phone'] ?? ''))
+        . renderCell((string) ($customer['phone'] ?? ''), 'nowrap')
         . '<td>' . renderProductList($order['items'] ?? []) . '</td>'
         . renderCell(formatEuros((float) ($totals['subtotal'] ?? 0)), 'amount')
         . renderCell(formatEuros((float) ($totals['vat'] ?? 0)), 'amount')
@@ -607,7 +607,7 @@ function renderOrdersTable(array $orders): string
 
     return <<<HTML
 <div class="table-wrapper">
-    <table>
+    <table class="orders-table">
         <thead>
             <tr>
                 <th scope="col">Order ID</th>

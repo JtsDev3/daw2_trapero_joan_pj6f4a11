@@ -106,6 +106,10 @@ body {
     padding: 0 1rem;
 }
 
+.page--wide {
+    max-width: 1320px;
+}
+
 .card {
     background: var(--color-surface);
     border-radius: var(--radius);
@@ -363,10 +367,21 @@ tbody tr:last-child td {
     font-weight: 700;
 }
 
+.nowrap {
+    white-space: nowrap;
+}
+
+.orders-table th,
+.orders-table td {
+    padding: 0.55rem 0.5rem;
+    font-size: 0.875rem;
+}
+
+
 .product-list {
     margin: 0;
-    padding-left: 1.1rem;
-    min-width: 260px;
+    padding-left: 1rem;
+    min-width: 180px;
 }
 
 .products-table input[type="checkbox"] {
