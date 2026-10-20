@@ -536,3 +536,106 @@ function sendOrdersFileError(): void
         . 'so the operation could not be completed.'
     );
 }
+
+/* ==========================================================================
+   8. Orders tables (used by "All orders" and "Single order")
+   ========================================================================== */
+
+/** One table cell with escaped text and an optional CSS class. */
+function renderCell(string $text, string $class = ''): string
+{
+    $classAttribute = $class === '' ? '' : ' class="' . $class . '"';
+
+    return '<td' . $classAttribute . '>' . escapeHtml($text) . '</td>';
+}
+
+/** List of the products of an order: "Name: quantity × unit price = line total". */
+function renderProductList(array $items): string
+{
+    $html = '<ul class="product-list">';
+
+    foreach ($items as $item) {
+        $html .= '<li>' . escapeHtml(
+            (string) ($item['name'] ?? '') . ': '
+            . (int) ($item['quantity'] ?? 0) . ' × ' . formatEuros((float) ($item['unitPrice'] ?? 0))
+            . ' = ' . formatEuros((float) ($item['lineTotal'] ?? 0))
+        ) . '</li>';
+    }
+
+    return $html . '</ul>';
+}
+
+/** One table row with all the data of an order. */
+function renderOrderRow(array $order): string
+{
+    $customer = $order['customer'] ?? [];
+    $totals = $order['totals'] ?? [];
+
+    return '<tr>'
+        . renderCell((string) ($order['orderId'] ?? ''), 'total')
+        . renderCell((string) ($order['createdAt'] ?? ''))
+        . renderCell((string) ($customer['fullName'] ?? ''))
+        . renderCell((string) ($customer['address'] ?? ''))
+        . renderCell((string) ($customer['email'] ?? ''))
+        . renderCell((string) ($customer['phone'] ?? ''))
+        . '<td>' . renderProductList($order['items'] ?? []) . '</td>'
+        . renderCell(formatEuros((float) ($totals['subtotal'] ?? 0)), 'amount')
+        . renderCell(formatEuros((float) ($totals['vat'] ?? 0)), 'amount')
+        . renderCell(formatEuros((float) ($totals['total'] ?? 0)), 'amount total')
+        . '</tr>';
+}
+
+/**
+ * Table with meaningful column names for a list of orders.
+ * The same function is used for all the orders and for a single order.
+ */
+function renderOrdersTable(array $orders): string
+{
+    $rows = '';
+
+    foreach ($orders as $order) {
+        if (is_array($order)) {
+            $rows .= renderOrderRow($order);
+        }
+    }
+
+    if ($rows === '') {
+        $rows = '<tr><td colspan="10">There are no orders yet.</td></tr>';
+    }
+
+    $vatHeader = escapeHtml('VAT (' . formatPercentage(VAT_RATE) . ')');
+
+    return <<<HTML
+<div class="table-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th scope="col">Order ID</th>
+                <th scope="col">Date</th>
+                <th scope="col">Customer name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Email</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Products (qty × unit price)</th>
+                <th scope="col" class="amount">Subtotal</th>
+                <th scope="col" class="amount">{$vatHeader}</th>
+                <th scope="col" class="amount">Total (VAT incl.)</th>
+            </tr>
+        </thead>
+        <tbody>
+            {$rows}
+        </tbody>
+    </table>
+</div>
+HTML;
+}
+
+/** 404 error: there is no order with the requested ID (F8). */
+function sendOrderNotFound(string $orderId): void
+{
+    $message = $orderId === ''
+        ? 'No order ID was provided.'
+        : 'There is no order with the ID "' . $orderId . '". Check the ID and try again.';
+
+    sendNotFound('Order not found', $message);
+}
