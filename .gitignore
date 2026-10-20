@@ -1,0 +1,13 @@
+# Runtime data: created automatically by the app when the first order is saved
+orders/orders.json
+
+# OS / editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local TLS certificates (never commit private keys)
+*.key
+*.crt
+*.pem
