@@ -1,0 +1,17 @@
+# ==========================================================================
+# Order Management App - Apache rules (requires mod_rewrite and AllowOverride All)
+# ==========================================================================
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+
+    # 1. Secure communications: every HTTP request is redirected to HTTPS
+    RewriteCond %{HTTPS} !=on
+    RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+    # 2. Data folders are never served to the browser: only PHP reads them
+    RewriteRule ^(users|orders)(/|$) - [F,L]
+
+    # 3. The application root opens the Home page
+    RewriteRule ^$ application/client/index.html [R=302,L]
+</IfModule>
