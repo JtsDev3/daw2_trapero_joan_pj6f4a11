@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single order – Order Management App</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/common.js" defer></script>
+    <script src="js/singleOrder.js" defer></script>
+</head>
+<body>
+    <header class="app-header">
+        <svg class="logo" viewBox="0 0 64 64" aria-hidden="true">
+            <circle class="logo-background" cx="32" cy="32" r="32"/>
+            <path class="logo-handle" d="M23 27 L29 15 M41 27 L35 15"/>
+            <circle class="logo-dot" cx="39" cy="24" r="6"/>
+            <path class="logo-basket" d="M11 27 H53 L47.5 50 Q47 52 45 52 H19 Q17 52 16.5 50 Z"/>
+            <path class="logo-slats" d="M24 33 V46 M32 33 V46 M40 33 V46"/>
+        </svg>
+        <span class="app-name">Order Management App</span>
+    </header>
+
+    <main class="page">
+        <section class="card card--narrow">
+            <h1>Single order</h1>
+            <p class="hint">Enter the ID of the order you want to see and click Search.</p>
+
+            <!-- GET: the order ID travels in the URL (?orderId=...) to getOrder.php -->
+            <form id="singleOrderForm" action="../server/getOrder.php" method="get" novalidate>
+                <div class="form-field">
+                    <label for="orderId">Order ID</label>
+                    <input type="text" id="orderId" name="orderId" maxlength="20" placeholder="e.g. ORD-0001" autocomplete="off">
+                </div>
+
+                <p id="searchMessage" class="message" role="alert" hidden></p>
+
+                <div class="button-bar">
+                    <button type="submit" class="primary">Search</button>
+                </div>
+            </form>
+
+            <div class="button-bar">
+                <button type="button" data-href="viewOrders.html">View orders menu</button>
+                <button type="button" data-href="operations.html">Operations menu</button>
+                <button type="button" data-href="index.html">Home</button>
+            </div>
+        </section>
+    </main>
+</body>
+</html>
